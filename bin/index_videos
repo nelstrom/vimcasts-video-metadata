@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require './lib/episode_index'
+video_root = ARGV.first	|| '/var/www/media.vimcasts.org/htdocs/videos/'
+EpisodeIndex.new(video_root).write_json
