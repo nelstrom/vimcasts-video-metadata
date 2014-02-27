@@ -1,0 +1,17 @@
+#!/bin/bash
+# Based on this one-liner:
+#   http://siliconchaos.blogspot.co.uk/2010/11/downloading-all-vimcastsorg-videos.html
+
+set -e
+
+for c in {1..5}; do
+  mkdir -p $c
+  for ext in ogv m4v; do
+    file=$(curl -s http://media.vimcasts.org/videos/$c/ |
+    grep $ext |
+    sed "s/.*$ext\">\(.*$ext\)<\/a>.*/\1/g");
+    url=http://media.vimcasts.org/videos/$c/$file;
+    echo $url;
+    curl -# -o "$c/$file" "$url";
+  done
+done
